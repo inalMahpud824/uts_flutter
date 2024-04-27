@@ -20,7 +20,7 @@ class Repository {
     }
   }
 
-  Future postData(String username, String password, String nama) async {
+  Future postDataRegister(String username, String password, String nama) async {
     print('$username dan $password');
     try {
       final response = await http.post(
@@ -34,7 +34,7 @@ class Repository {
           'nama': nama
         }),
       );
-      if(response.statusCode == 200) {
+      if(response.statusCode == 201) {
         return true;
       }
     } catch (e) {

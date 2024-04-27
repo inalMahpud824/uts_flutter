@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
       print('password tidak sesuai');
       return false;
     }
-    bool register = await repository.postData(_usernameController.text,
+    bool register = await repository.postDataRegister(_usernameController.text,
         _passwordController.text, _namaController.text);
     register
         ? Navigator.push(context, MaterialPageRoute(builder: (context) {
