@@ -29,29 +29,32 @@ class _AmbilDataState extends State<AmbilData> {
             appBar: AppBar(
               title: Text('Form Sederhana'),
             ),
-            body: FutureBuilder<dynamic>(
-              future: repository.getData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final listAkun =
-                      snapshot.data!; // Akses aman setelah pemeriksaan null
-                  return ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Text(listAkun[index].body),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return Divider();
-                      },
-                      itemCount: listAkun.length);
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Kesalahan: ${snapshot.error}'));
-                }
+            body: Text('berhasil')
+            // FutureBuilder<dynamic>(
+            //   future: repository.getData(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       final listAkun =
+            //           snapshot.data!; // Akses aman setelah pemeriksaan null
+            //       return ListView.separated(
+            //           itemBuilder: (context, index) {
+            //             return Container(
+            //               child: Text(listAkun[index].body),
+            //             );
+            //           },
+            //           separatorBuilder: (context, index) {
+            //             return Divider();
+            //           },
+            //           itemCount: listAkun.length);
+            //     } else if (snapshot.hasError) {
+            //       return Center(child: Text('Kesalahan: ${snapshot.error}'));
+            //     }
 
-                // Tampilkan indikator pemuatan saat data sedang diambil
-                return Center(child: CircularProgressIndicator());
-              },
-            )));
+            //     // Tampilkan indikator pemuatan saat data sedang diambil
+            //     return Center(child: CircularProgressIndicator());
+            //   },
+            // )));
+        )
+    );
   }
 }

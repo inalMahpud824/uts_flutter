@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percobaan_apps/getData.dart';
 import 'package:percobaan_apps/repository.dart';
 
 class Register extends StatefulWidget {
@@ -14,41 +15,37 @@ class _RegisterState extends State<Register> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _namaController = TextEditingController();
+  final _confirmPassword = TextEditingController();
 
   sendData() async {
     if (_usernameController.text == '' ||
         _usernameController.text == null ||
         _namaController.text == '' ||
         _namaController.text == null) {
+      print('data tidak boleh kosong');
+      return false;
+    }
+    if(_passwordController.text != _confirmPassword.text){
+      print('password tidak sesuai');
       return false;
     }
     bool register = await repository.postData(_usernameController.text,
         _passwordController.text, _namaController.text);
+    register
+        ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const AmbilData();
+          }))
+        : print('error');
   }
-
-  // void dispose() {
-  //   // Clean up the controller when the widget is disposed.
-  //   myController.dispose();
-  //   mycontrollerPassword.dispose();
-  //   super.dispose();
-  // }
-
-  // var text = '';
-  // var password = '';
-  // tambahdata() {
-  //   setState(() {
-  //     text = myController.text;
-  //     password = mycontrollerPassword.text;
-  //     // number = number + 1;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Form Sederhana'),
+          title: Text('Register'),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.lightBlue,
         ),
         body: Center(
           child: Column(
@@ -81,15 +78,18 @@ class _RegisterState extends State<Register> {
                         labelText: 'Password',
                       ),
                     ),
-
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      child: Text('Masukan'),
-                      onPressed: sendData
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: _confirmPassword,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Confirm Password',
+                        labelText: 'Confirm Password',
+                      ),
                     ),
                     SizedBox(height: 16),
-                    // Text(text),
-                    // Text(password)
+                    ElevatedButton(child: Text('Daftar'), onPressed: sendData),
+                    SizedBox(height: 16),
                   ])),
             ],
           ),
