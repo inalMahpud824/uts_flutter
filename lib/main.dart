@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:percobaan_apps/getData.dart';
 import 'package:percobaan_apps/register.dart';
 
 void main() => runApp(MyWidget());
