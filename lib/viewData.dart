@@ -38,7 +38,7 @@ class _HomePageState extends State<ViewDataPage> {
         ),
         body: Column(
           children: [
-             ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return AddForm();
@@ -51,8 +51,11 @@ class _HomePageState extends State<ViewDataPage> {
                   future: repository.getDataProfile(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      final listProfile =
-                          snapshot.data!; // Akses aman setelah pemeriksaan null
+                      final listProfile = snapshot.data!;
+                      if (listProfile.isEmpty) {
+                        return Center(child: Text('Data Tidak Ada'));
+                      }
+                      ; // Akses aman setelah pemeriksaan null
                       return ListView.builder(
                         itemCount: listProfile.length,
                         itemBuilder: (context, index) =>
@@ -100,8 +103,7 @@ class _HomePageState extends State<ViewDataPage> {
                 fit: BoxFit.fill,
                 image: NetworkImage(
                     // 'http://localhost:8000/images/${profile.image}'
-                    'http://10.0.2.2:8000/images/${profile.image}'
-                    ),
+                    'http://10.0.2.2:8000/images/${profile.image}'),
               ),
             ),
             SizedBox(height: 16),
@@ -109,9 +111,12 @@ class _HomePageState extends State<ViewDataPage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return UpdateForm(profile: profile,);
-                }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return UpdateForm(
+                        profile: profile,
+                      );
+                    }));
                     // Implementasi logika edit
                   },
                   child: Text('Edit'),
