@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:percobaan_apps/getData.dart';
+import 'package:percobaan_apps/login.dart';
 import 'package:percobaan_apps/repository.dart';
 
 class Register extends StatefulWidget {
@@ -33,7 +33,7 @@ class _RegisterState extends State<Register> {
         _passwordController.text, _namaController.text);
     register
         ? Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const AmbilData();
+            return  LoginPage();
           }))
         : print('error');
   }
